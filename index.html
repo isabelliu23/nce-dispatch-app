@@ -595,7 +595,7 @@
             <div class="section" id="customersSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Customers List</div>
+                        <div class="card-title">客戶名單</div>
                         <button class="btn btn-primary btn-sm" onclick="openModal('addCustomersModal')">+ 新增客戶</button>
                     </div>
                     <table class="data-table">
@@ -662,7 +662,7 @@
                         <option value="cancelled">Cancelled</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Job</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">儲存</button>
             </form>
         </div>
     </div>
@@ -684,7 +684,7 @@
                     <input type="tel" id="driver電話" required>
                 </div>
                 <div class="form-group">
-                    <label>Car Plate</label>
+                    <label>車牌</label>
                     <input type="text" id="driverLicense" required>
                 </div>
                 
@@ -710,7 +710,7 @@
                         <option value="inactive">Inactive</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Drivers</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">儲存</button>
             </form>
         </div>
     </div>
@@ -751,7 +751,7 @@
                     <label>Notes</label>
                     <textarea id="expenseNotes" rows="2"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Expense</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">儲存</button>
             </form>
         </div>
     </div>
@@ -776,7 +776,7 @@
                     <label>電話</label>
                     <input type="tel" id="customer電話">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Customers</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">儲存</button>
             </form>
         </div>
     </div>
@@ -982,10 +982,10 @@
                     'Commercial Model': '商業模特兒',
                     'Fashion Model': '時尚模特兒',
                     'Promotional Staff': '推廣員工',
-                    'Save Job': '儲存Jobs',
-                    'Save Drivers': '儲存Drivers',
-                    'Save Customers': '儲存Customers',
-                    'Save Expense': '儲存支出',
+                    '儲存': '儲存',
+                    '儲存': '儲存Drivers',
+                    '儲存': '儲存',
+                    '儲存': '儲存',
                     'Date': '日期',
                     'Expense Type': '支出類型',
                     'Notes': '備註',
@@ -1050,10 +1050,10 @@
                     'Commercial Model': '商業模特兒',
                     'Fashion Model': '時尚模特兒',
                     'Promotional Staff': '推廣員工',
-                    'Save Job': '儲存Jobs',
-                    'Save Drivers': '儲存Drivers',
-                    'Save Customers': '儲存Customers',
-                    'Save Expense': '儲存支出',
+                    '儲存': '儲存',
+                    '儲存': '儲存Drivers',
+                    '儲存': '儲存',
+                    '儲存': '儲存',
                     'Date': '日期',
                     'Expense Type': '支出類型',
                     'Notes': '備註',
@@ -1114,7 +1114,7 @@
             document.getElementById(id).classList.remove('active');
         }
         
-        // Save Job
+        // 儲存
         function saveJob(e) {
             e.preventDefault();
             const job = {
@@ -1135,7 +1135,7 @@
             e.target.reset();
         }
         
-        // Save Drivers
+        // 儲存
         function saveDrivers(e) {
             e.preventDefault();
             const driver姓名 = document.getElementById('driver姓名').value;
@@ -1179,7 +1179,7 @@
             document.getElementById('full時間RateGroup').style.display = type === 'full-time' ? 'block' : 'none';
         }
         
-        // Save Expense
+        // 儲存
         function saveExpense(e) {
             e.preventDefault();
             const expense = {
@@ -1197,7 +1197,7 @@
             e.target.reset();
         }
         
-        // Save Customers
+        // 儲存
         let editingCustomersId = null;
         
         function saveCustomers(e) {
