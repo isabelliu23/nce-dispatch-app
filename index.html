@@ -777,7 +777,7 @@
                 name: document.getElementById('driverName').value,
                 phone: document.getElementById('driverPhone').value,
                 license: document.getElementById('driverLicense').value,
-                rate: parseFloat(document.getElementById('driverRate').value),
+                
                 carPlate: document.getElementById('driverCarPlate').value,
                 status: document.getElementById('driverStatus').value
             };
@@ -963,7 +963,7 @@
                 document.getElementById('driverName').value = driver.name;
                 document.getElementById('driverPhone').value = driver.phone;
                 document.getElementById('driverLicense').value = driver.license;
-                document.getElementById('driverRate').value = driver.rate;
+                
                 document.getElementById('driverStatus').value = driver.status;
                 openModal('addDriverModal');
             }
