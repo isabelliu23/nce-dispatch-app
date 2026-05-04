@@ -464,11 +464,11 @@
 
         <!-- Tabs -->
         <div class="tabs">
-            <div class="tab active" data-tab="jobs">Jobs</div>
-            <div class="tab" data-tab="drivers">Drivers</div>
-            <div class="tab" data-tab="customers">Customers</div>
-            <div class="tab" data-tab="salary">Salary</div>
-            <div class="tab" data-tab="expenses">Expenses</div>
+            <div class="tab active" data-tab="jobs" data-i18n="Jobs">Jobs</div>
+            <div class="tab" data-tab="drivers" data-i18n="Drivers">Drivers</div>
+            <div class="tab" data-tab="customers" data-i18n="Customers">Customers</div>
+            <div class="tab" data-tab="salary" data-i18n="Salary">Salary</div>
+            <div class="tab" data-tab="expenses" data-i18n="Expenses">Expenses</div>
         </div>
 
         <!-- Jobs Section -->
@@ -923,23 +923,168 @@
         
         function changeLanguage() {
             const lang = document.getElementById('langSelect').value;
+            const headerLang = document.getElementById('headerLang');
+            if (headerLang) headerLang.value = lang;
             localStorage.setItem('nce_lang', lang);
             
-            // Update all translatable elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.textContent = translations[lang][key];
+            const translations = {
+                en: {
+                    'Driver Dispatch & Salary System': '司機調度及薪酬系統',
+                    'Username': '用戶名',
+                    'Password': '密碼',
+                    'Login': '登入',
+                    'Remember for 30 days': '記住30天',
+                    'Dashboard': '控制面板',
+                    "Today's Jobs": '今日工作',
+                    "Today's": '今日',
+                    'Monthly Revenue': '月收入',
+                    'Pending Salary': '待付薪酬',
+                    'Active Drivers': '在職司機',
+                    'Jobs': '工作',
+                    'Drivers': '司機',
+                    'Customers': '客戶',
+                    'Salary': '薪酬',
+                    'Expenses': '支出',
+                    "Today's Jobs": '今日工作',
+                    'Add Job': '新增工作',
+                    'Add Driver': '新增司機',
+                    'Add Customer': '新增客戶',
+                    'Add Expense': '新增支出',
+                    "No jobs today. Add a new job to get started.": '今日沒有工作。',
+                    'No drivers added yet.': '尚未添加司機。',
+                    'No customers added yet.': '尚未添加客戶。',
+                    'No expenses recorded.': '沒有記錄支出。',
+                    'Time': '時間',
+                    'Route': '路線',
+                    'Driver': '司機',
+                    'Customer': '客戶',
+                    'Amount': '金額',
+                    'Status': '狀態',
+                    'Actions': '操作',
+                    'Name': '姓名',
+                    'Company': '公司',
+                    'Phone': '電話',
+                    'Select Driver': '選擇司機',
+                    'Select Customer': '選擇客戶',
+                    'Full-time (50-60% fare)': '全職 (50-60% 車資)',
+                    'Part-time (custom rate)': '兼職 (自訂金額)',
+                    'Active': '在職',
+                    'Inactive': '離職',
+                    'Pending': '待處理',
+                    'Completed': '已完成',
+                    'Cancelled': '已取消',
+                    'Host & Brand Ambassador': '主持及品牌大使',
+                    'Live Music Performance': '現場音樂表演',
+                    'Event Host': '活動主持',
+                    'Commercial Model': '商業模特兒',
+                    'Fashion Model': '時尚模特兒',
+                    'Promotional Staff': '推廣員工',
+                    'Save Job': '儲存工作',
+                    'Save Driver': '儲存司機',
+                    'Save Customer': '儲存客戶',
+                    'Save Expense': '儲存支出',
+                    'Date': '日期',
+                    'Expense Type': '支出類型',
+                    'Notes': '備註',
+                    'OT': '加班',
+                    'Parking': '停車場',
+                    'Tunnel': '隧道',
+                    'Fuel': '燃料',
+                    'Other': '其他',
+                    'Edit': '編輯',
+                    'Delete': '刪除',
+                    'Welcome': '歡迎',
+                    'Logout': '登出',
+                    'New Creation Era': '新創世紀'
+                },
+                zh: {
+                    'Driver Dispatch & Salary System': '司機調度及薪酬系統',
+                    'Username': '用戶名',
+                    'Password': '密碼',
+                    'Login': '登入',
+                    'Remember for 30 days': '記住30天',
+                    'Dashboard': '控制面板',
+                    "Today's Jobs": '今日工作',
+                    "Today's": '今日',
+                    'Monthly Revenue': '月收入',
+                    'Pending Salary': '待付薪酬',
+                    'Active Drivers': '在職司機',
+                    'Jobs': '工作',
+                    'Drivers': '司機',
+                    'Customers': '客戶',
+                    'Salary': '薪酬',
+                    'Expenses': '支出',
+                    'Add Job': '新增工作',
+                    'Add Driver': '新增司機',
+                    'Add Customer': '新增客戶',
+                    'Add Expense': '新增支出',
+                    "No jobs today. Add a new job to get started.": '今日沒有工作。點擊上方新增工作。',
+                    'No drivers added yet.': '尚未添加司機。',
+                    'No customers added yet.': '尚未添加客戶。',
+                    'No expenses recorded.': '沒有記錄支出。',
+                    'Time': '時間',
+                    'Route': '路線',
+                    'Driver': '司機',
+                    'Customer': '客戶',
+                    'Amount': '金額',
+                    'Status': '狀態',
+                    'Actions': '操作',
+                    'Name': '姓名',
+                    'Company': '公司',
+                    'Phone': '電話',
+                    'Select Driver': '選擇司機',
+                    'Select Customer': '選擇客戶',
+                    'Full-time (50-60% fare)': '全職 (50-60% 車資)',
+                    'Part-time (custom rate)': '兼職 (自訂金額)',
+                    'Active': '在職',
+                    'Inactive': '離職',
+                    'Pending': '待處理',
+                    'Completed': '已完成',
+                    'Cancelled': '已取消',
+                    'Host & Brand Ambassador': '主持及品牌大使',
+                    'Live Music Performance': '現場音樂表演',
+                    'Event Host': '活動主持',
+                    'Commercial Model': '商業模特兒',
+                    'Fashion Model': '時尚模特兒',
+                    'Promotional Staff': '推廣員工',
+                    'Save Job': '儲存工作',
+                    'Save Driver': '儲存司機',
+                    'Save Customer': '儲存客戶',
+                    'Save Expense': '儲存支出',
+                    'Date': '日期',
+                    'Expense Type': '支出類型',
+                    'Notes': '備註',
+                    'OT': '加班',
+                    'Parking': '停車場',
+                    'Tunnel': '隧道',
+                    'Fuel': '燃料',
+                    'Other': '其他',
+                    'Edit': '編輯',
+                    'Delete': '刪除',
+                    'Welcome': '歡迎',
+                    'Logout': '登出',
+                    'New Creation Era': '新創世紀'
+                }
+            };
+            
+            // Translate textContent
+            document.querySelectorAll('h1, h2, h3, th, td, .label, .subtitle, p, span, .btn, .card-title').forEach(el => {
+                const text = el.textContent.trim();
+                if (translations[lang][text]) {
+                    el.textContent = translations[lang][text];
+                } else if (el.tagName === 'TH' || el.tagName === 'TD') {
+                    // Handle table headers
+                    Object.keys(translations[lang]).forEach(key => {
+                        if (text.includes(key)) {
+                            el.textContent = el.textContent.replace(key, translations[lang][key]);
+                        }
+                    });
                 }
             });
             
-            // Update placeholders
-            const placeholders = {
-                en: { 'username': 'Username', 'password': 'Password' },
-                zh: { 'username': '用戶名', 'password': '密碼' }
-            };
-            document.getElementById('username').placeholder = placeholders[lang].username;
-            document.getElementById('password').placeholder = placeholders[lang].password;
+            // Translate placeholders
+            document.getElementById('username').placeholder = translations[lang]['Username'];
+            document.getElementById('password').placeholder = translations[lang]['Password'];
         }
         
         function logout() {
