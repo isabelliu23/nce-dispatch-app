@@ -409,12 +409,6 @@
         <div class="login-box">
             <h1>🚗 New Creation Era</h1>
             <p class="subtitle">Driver Dispatch & Salary System</p>
-            <div style="text-align: left; margin-bottom: 16px;">
-                <select id="langSelect" onchange="doLang(this.value)" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-                    <option value="en">English</option>
-                    <option value="zh">中文 (Traditional Chinese)</option>
-                </select>
-            </div>
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="password" placeholder="Password" required>
@@ -433,10 +427,6 @@
         <header class="header">
             <div class="header-logo">🚗 NCE Dispatch</div>
             <div class="header-user">
-                <select id="headerLang" onchange="doLang(this.value)" style="padding: 4px 8px; border: 1px solid var(--gold); border-radius: 4px; background: transparent; color: var(--gold); font-size: 12px;">
-                    <option value="en">EN</option>
-                    <option value="zh">中文</option>
-                </select>
                 <span id="userName">Welcome</span>
                 <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
