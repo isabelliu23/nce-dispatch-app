@@ -452,6 +452,7 @@
         <div class="tabs">
             <div class="tab active" data-tab="jobs">Jobs</div>
             <div class="tab" data-tab="drivers">Drivers</div>
+            <div class="tab" data-tab="customers">Customers</div>
             <div class="tab" data-tab="salary">Salary</div>
             <div class="tab" data-tab="expenses">Expenses</div>
         </div>
@@ -582,6 +583,32 @@
                 </div>
             </div>
         </div>
+
+            <!-- Customers Section -->
+            <div class="section" id="customersSection">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Customer List</div>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('addCustomerModal')">+ Add Customer</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTable">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #999;">No customers added yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Add Job Modal -->
@@ -608,6 +635,12 @@
                     <label>Assign Driver</label>
                     <select id="jobDriver" required>
                         <option value="">Select Driver</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Customer</label>
+                    <select id="jobCustomer">
+                        <option value="">Select Customer</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -716,11 +749,37 @@
         </div>
     </div>
 
+    <!-- Add Customer Modal -->
+    <div class="modal" id="addCustomerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Customer</h2>
+                <button class="modal-close" onclick="closeModal('addCustomerModal')">&times;</button>
+            </div>
+            <form onsubmit="saveCustomer(event)">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="customerCompany">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="customerPhone">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Customer</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Data Storage (localStorage for demo)
         let drivers = JSON.parse(localStorage.getItem('nce_drivers')) || [];
         let jobs = JSON.parse(localStorage.getItem('nce_jobs')) || [];
         let expenses = JSON.parse(localStorage.getItem('nce_expenses')) || [];
+        let customers = JSON.parse(localStorage.getItem('nce_customers')) || [];
         
         // Login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -772,6 +831,7 @@
                 time: document.getElementById('jobTime').value,
                 route: document.getElementById('jobRoute').value,
                 driver: document.getElementById('jobDriver').value,
+                customer: document.getElementById('jobCustomer').value,
                 amount: parseFloat(document.getElementById('jobAmount').value),
                 status: document.getElementById('jobStatus').value
             };
@@ -845,13 +905,80 @@
             e.target.reset();
         }
         
+        // Save Customer
+        let editingCustomerId = null;
+        
+        function saveCustomer(e) {
+            e.preventDefault();
+            const customerData = {
+                id: editingCustomerId || Date.now(),
+                name: document.getElementById('customerName').value,
+                company: document.getElementById('customerCompany').value,
+                phone: document.getElementById('customerPhone').value
+            };
+            
+            if (editingCustomerId) {
+                const index = customers.findIndex(c => c.id === editingCustomerId);
+                if (index > -1) customers[index] = customerData;
+            } else {
+                customers.push(customerData);
+            }
+            
+            localStorage.setItem('nce_customers', JSON.stringify(customers));
+            closeModal('addCustomerModal');
+            loadCustomers();
+            e.target.reset();
+            editingCustomerId = null;
+        }
+        
+        function loadCustomers() {
+            const tbody = document.getElementById('customersTable');
+            if (customers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No customers added yet.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = customers.map(c => `
+                <tr>
+                    <td>${c.name}</td>
+                    <td>${c.company || '-'}</td>
+                    <td>${c.phone || '-'}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editCustomer(${c.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteCustomer(${c.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function editCustomer(id) {
+            const customer = customers.find(c => c.id === id);
+            if (customer) {
+                editingCustomerId = id;
+                document.getElementById('customerName').value = customer.name;
+                document.getElementById('customerCompany').value = customer.company || '';
+                document.getElementById('customerPhone').value = customer.phone || '';
+                openModal('addCustomerModal');
+            }
+        }
+        
+        function deleteCustomer(id) {
+            if (confirm('Delete this customer?')) {
+                customers = customers.filter(c => c.id !== id);
+                localStorage.setItem('nce_customers', JSON.stringify(customers));
+                loadCustomers();
+                updateCustomerSelects();
+            }
+        }
+        
         // Load Data
         function loadData() {
             loadDrivers();
+            loadCustomers();
             loadJobs();
             loadExpenses();
             updateStats();
             updateDriverSelects();
+            updateCustomerSelects();
         }
         
         function loadDrivers() {
@@ -941,6 +1068,11 @@
             // Job options for expenses
             const jobOptions = '<option value="">Select Job</option>' + jobs.map(j => `<option value="${j.route}">${j.route} (${j.date})</option>`).join('');
             document.getElementById('expenseJob').innerHTML = jobOptions;
+        }
+        
+        function updateCustomerSelects() {
+            const options = '<option value="">Select Customer</option>' + customers.map(c => `<option value="${c.name}">${c.name}${c.company ? ' - ' + c.company : ''}</option>`).join('');
+            document.getElementById('jobCustomer').innerHTML = options;
         }
         
         function calculateSalary() {
