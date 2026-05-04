@@ -927,6 +927,7 @@
             localStorage.setItem('nce_customers', JSON.stringify(customers));
             closeModal('addCustomerModal');
             loadCustomers();
+            updateCustomerSelects();
             e.target.reset();
             editingCustomerId = null;
         }
