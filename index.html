@@ -651,9 +651,17 @@
                 
                 <div class="form-group">
                     <label>Driver Type</label>
-                    <select id="driverType">
+                    <select id="driverType" onchange="toggleFullTimeRate()">
                         <option value="full-time">Full-time (50-60% fare)</option>
                         <option value="part-time">Part-time (custom rate)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="fullTimeRateGroup" style="display:none;">
+                    <label>Full-time Rate</label>
+                    <select id="driverFullRate">
+                        <option value="0.50">50%</option>
+                        <option value="0.55">55%</option>
+                        <option value="0.60">60%</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -785,6 +793,7 @@
                 phone: document.getElementById('driverPhone').value,
                 license: document.getElementById('driverLicense').value,
                 driverType: document.getElementById('driverType').value,
+                fullRate: document.getElementById('driverFullRate') ? document.getElementById('driverFullRate').value : null,
                 status: document.getElementById('driverStatus').value
             };
             drivers.push(driver);
@@ -793,6 +802,11 @@
             loadDrivers();
             updateStats();
             e.target.reset();
+        }
+        
+        function toggleFullTimeRate() {
+            const type = document.getElementById('driverType').value;
+            document.getElementById('fullTimeRateGroup').style.display = type === 'full-time' ? 'block' : 'none';
         }
         
         // Save Expense
@@ -921,18 +935,18 @@
                     const driverName = job.driver;
                     const driver = drivers.find(d => d.name === driverName);
                     const driverType = driver?.driverType || 'part-time';
+                    const fullRate = driver?.fullRate ? parseFloat(driver.fullRate) : 0.55;
                     
                     if (!driverSalaries[driverName]) {
-                        driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: driverType };
+                        driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: driverType, rate: fullRate };
                     }
                     driverSalaries[driverName].jobs++;
                     
-                    // Full-time: 55% of fare (middle of 50-60%)
-                    // Part-time: custom amount stored in job
+                    // Full-time: custom rate (50%, 55%, or 60%)
+                    // Part-time: 40% fallback
                     if (driverType === 'full-time') {
-                        driverSalaries[driverName].base += job.amount * 0.55;
+                        driverSalaries[driverName].base += job.amount * fullRate;
                     } else {
-                        // Part-time: use stored custom amount or 40% fallback
                         driverSalaries[driverName].base += job.amount * 0.4;
                     }
                 }
@@ -964,7 +978,7 @@
             tbody.innerHTML = entries.map(([name, data]) => `
                 <tr>
                     <td>${name}</td>
-                    <td>${data.type === 'full-time' ? 'Full-time (55%)' : 'Part-time'}</td>
+                    <td>${data.type === 'full-time' ? 'Full-time (' + (data.rate * 100) + '%)' : 'Part-time'}</td>
                     <td>${data.jobs}</td>
                     <td>$${data.base.toFixed(2)}</td>
                     <td>$${data.expenses.toFixed(2)}</td>
