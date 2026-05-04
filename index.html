@@ -786,21 +786,29 @@
         // Save Driver
         function saveDriver(e) {
             e.preventDefault();
-            const driver = {
-                id: Date.now(),
+            const driverData = {
+                id: editingDriverId || Date.now(),
                 name: document.getElementById('driverName').value,
                 phone: document.getElementById('driverPhone').value,
                 license: document.getElementById('driverLicense').value,
                 driverType: document.getElementById('driverType').value,
-                fullRate: document.getElementById('driverFullRate') ? document.getElementById('driverFullRate').value : null,
+                fullRate: document.getElementById('driverType').value === 'full-time' ? document.getElementById('driverFullRate').value : null,
                 status: document.getElementById('driverStatus').value
             };
-            drivers.push(driver);
+            
+            if (editingDriverId) {
+                const index = drivers.findIndex(d => d.id === editingDriverId);
+                if (index > -1) drivers[index] = driverData;
+            } else {
+                drivers.push(driverData);
+            }
+            
             localStorage.setItem('nce_drivers', JSON.stringify(drivers));
             closeModal('addDriverModal');
             loadDrivers();
             updateStats();
             e.target.reset();
+            editingDriverId = null;
         }
         
         function toggleFullTimeRate() {
@@ -986,15 +994,22 @@
             `).join('');
         }
         
-        // Edit functions (simplified)
+        // Edit functions
+        let editingDriverId = null;
+        
         function editDriver(id) {
             const driver = drivers.find(d => d.id === id);
             if (driver) {
+                editingDriverId = id;
                 document.getElementById('driverName').value = driver.name;
                 document.getElementById('driverPhone').value = driver.phone;
                 document.getElementById('driverLicense').value = driver.license;
-                
+                document.getElementById('driverType').value = driver.driverType || 'part-time';
                 document.getElementById('driverStatus').value = driver.status;
+                toggleFullTimeRate();
+                if (driver.fullRate) {
+                    document.getElementById('driverFullRate').value = driver.fullRate;
+                }
                 openModal('addDriverModal');
             }
         }
