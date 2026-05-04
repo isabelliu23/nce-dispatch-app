@@ -409,6 +409,12 @@
         <div class="login-box">
             <h1>🚗 New Creation Era</h1>
             <p class="subtitle">Driver Dispatch & Salary System</p>
+            <div style="text-align: left; margin-bottom: 16px;">
+                <select id="langSelect" onchange="changeLanguage()" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+                    <option value="en">English</option>
+                    <option value="zh">中文 (Traditional Chinese)</option>
+                </select>
+            </div>
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="password" placeholder="Password" required>
@@ -427,6 +433,10 @@
         <header class="header">
             <div class="header-logo">🚗 NCE Dispatch</div>
             <div class="header-user">
+                <select id="headerLang" onchange="changeLanguage()" style="padding: 4px 8px; border: 1px solid var(--gold); border-radius: 4px; background: transparent; color: var(--gold); font-size: 12px;">
+                    <option value="en">EN</option>
+                    <option value="zh">中文</option>
+                </select>
                 <span id="userName">Welcome</span>
                 <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
@@ -834,7 +844,103 @@
                     localStorage.removeItem('nce_login');
                 }
             }
+            
+            // Load saved language
+            const savedLang = localStorage.getItem('nce_lang') || 'en';
+            document.getElementById('langSelect').value = savedLang;
+            changeLanguage();
         });
+        
+        // Language translations
+        const translations = {
+            en: {
+                'Dashboard': 'Dashboard',
+                'Jobs': 'Jobs',
+                'Drivers': 'Drivers',
+                'Customers': 'Customers',
+                'Salary': 'Salary',
+                'Expenses': 'Expenses',
+                "Today's Jobs": "Today's Jobs",
+                'Monthly Revenue': 'Monthly Revenue',
+                'Pending Salary': 'Pending Salary',
+                'Add Job': '+ Add Job',
+                'Add Driver': '+ Add Driver',
+                'Add Customer': '+ Add Customer',
+                'Add Expense': '+ Add Expense',
+                'Time': 'Time',
+                'Route': 'Route',
+                'Driver': 'Driver',
+                'Customer': 'Customer',
+                'Amount': 'Amount',
+                'Status': 'Status',
+                'Actions': 'Actions',
+                'Name': 'Name',
+                'Company': 'Company',
+                'Phone': 'Phone',
+                'Type': 'Type',
+                'Save': 'Save',
+                'Cancel': 'Cancel',
+                'Logout': 'Logout',
+                'Welcome': 'Welcome',
+                'Active Drivers': 'Active Drivers',
+                'Select Driver': 'Select Driver',
+                'Select Customer': 'Select Customer'
+            },
+            zh: {
+                'Dashboard': '控制面板',
+                'Jobs': '工作',
+                'Drivers': '司機',
+                'Customers': '客戶',
+                'Salary': '薪酬',
+                'Expenses': '支出',
+                "Today's Jobs": '今日工作',
+                'Monthly Revenue': '月收入',
+                'Pending Salary': '待付薪酬',
+                'Add Job': '+ 新增工作',
+                'Add Driver': '+ 新增司機',
+                'Add Customer': '+ 新增客戶',
+                'Add Expense': '+ 新增支出',
+                'Time': '時間',
+                'Route': '路線',
+                'Driver': '司機',
+                'Customer': '客戶',
+                'Amount': '金額',
+                'Status': '狀態',
+                'Actions': '操作',
+                'Name': '姓名',
+                'Company': '公司',
+                'Phone': '電話',
+                'Type': '類型',
+                'Save': '儲存',
+                'Cancel': '取消',
+                'Logout': '登出',
+                'Welcome': '歡迎',
+                'Active Drivers': '在職司機',
+                'Select Driver': '���擇司機',
+                'Select Customer': '選擇客戶'
+            }
+        };
+        
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            localStorage.setItem('nce_lang', lang);
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            const placeholders = {
+                en: { 'username': 'Username', 'password': 'Password' },
+                zh: { 'username': '用戶名', 'password': '密碼' }
+            };
+            document.getElementById('username').placeholder = placeholders[lang].username;
+            document.getElementById('password').placeholder = placeholders[lang].password;
+        }
         
         function logout() {
             document.getElementById('loginScreen').style.display = 'flex';
