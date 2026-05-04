@@ -786,9 +786,20 @@
         // Save Driver
         function saveDriver(e) {
             e.preventDefault();
+            const driverName = document.getElementById('driverName').value;
+            
+            // Check for duplicate (exclude current editing driver)
+            if (!editingDriverId) {
+                const duplicate = drivers.find(d => d.name.toLowerCase() === driverName.toLowerCase());
+                if (duplicate) {
+                    alert('Driver already exists!');
+                    return;
+                }
+            }
+            
             const driverData = {
                 id: editingDriverId || Date.now(),
-                name: document.getElementById('driverName').value,
+                name: driverName,
                 phone: document.getElementById('driverPhone').value,
                 license: document.getElementById('driverLicense').value,
                 driverType: document.getElementById('driverType').value,
