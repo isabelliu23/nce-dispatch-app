@@ -443,7 +443,7 @@
             </div>
             <div class="stat-card">
                 <div class="value" id="todayJobs">0</div>
-                <div class="label">Today's Jobs</div>
+                <div class="label">今日訂單</div>
             </div>
             <div class="stat-card">
                 <div class="value" id="monthlyRevenue">$0</div>
@@ -469,7 +469,7 @@
             <div class="section active" id="jobsSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Today's Jobs</div>
+                        <div class="card-title">今日訂單</div>
                         <button class="btn btn-primary btn-sm" onclick="openModal('addJobModal')">+ 新增訂單</button>
                     </div>
                     <table class="data-table">
@@ -854,7 +854,7 @@
                 'Customers': 'Customers',
                 'Salary': 'Salary',
                 'Expenses': 'Expenses',
-                "Today's Jobs": "Today's Jobs",
+                "今日訂單": "今日訂單",
                 '月收入': '月收入',
                 'Pending Salary': 'Pending Salary',
                 '新增Jobs': '+ 新增訂單',
@@ -887,7 +887,7 @@
                 'Customers': 'Customers',
                 'Salary': 'Salary',
                 'Expenses': 'Expenses',
-                "Today's Jobs": '今日Jobs',
+                "今日訂單": '今日Jobs',
                 '月收入': '月收入',
                 'Pending Salary': '待付Salary',
                 '新增Jobs': '+ 新增訂單',
@@ -938,7 +938,7 @@
                     'Login': 'Login',
                     'Remember me for 30 days': 'Remember me for 30 days',
                     'Dashboard': '控制面板',
-                    "Today's Jobs": '今日Jobs',
+                    "今日訂單": '今日Jobs',
                     "Today's": '今日',
                     '月收入': '月收入',
                     'Pending Salary': '待付Salary',
@@ -948,7 +948,7 @@
                     'Customers': 'Customers',
                     'Salary': 'Salary',
                     'Expenses': 'Expenses',
-                    "Today's Jobs": '今日Jobs',
+                    "今日訂單": '今日Jobs',
                     '新增Jobs': '新增Jobs',
                     '新增Drivers': '新增Drivers',
                     '新增Customers': '新增Customers',
@@ -994,7 +994,7 @@
                     'Tunnel': '隧道',
                     'Fuel': '燃料',
                     'Other': '其他',
-                    'Edit': '編輯',
+                    '修改': '編輯',
                     'Delete': '刪除',
                     'Welcome': 'Welcome',
                     '登出': '登出',
@@ -1007,7 +1007,7 @@
                     'Login': 'Login',
                     'Remember me for 30 days': 'Remember me for 30 days',
                     'Dashboard': '控制面板',
-                    "Today's Jobs": '今日Jobs',
+                    "今日訂單": '今日Jobs',
                     "Today's": '今日',
                     '月收入': '月收入',
                     'Pending Salary': '待付Salary',
@@ -1062,7 +1062,7 @@
                     'Tunnel': '隧道',
                     'Fuel': '燃料',
                     'Other': '其他',
-                    'Edit': '編輯',
+                    '修改': '編輯',
                     'Delete': '刪除',
                     'Welcome': 'Welcome',
                     '登出': '登出',
@@ -1236,8 +1236,8 @@
                     <td>${c.company || '-'}</td>
                     <td>${c.phone || '-'}</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="editCustomers(${c.id})">Edit</button>
-                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteCustomers(${c.id})">Delete</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editCustomers(${c.id})">修改</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteCustomers(${c.id})">刪除</button>
                     </td>
                 </tr>
             `).join('');
@@ -1288,8 +1288,8 @@
                     <td>$${d.rate}</td>
                     <td><span class="status ${d.status === 'active' ? 'completed' : 'pending'}">${d.status}</span></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="editDrivers(${d.id})">Edit</button>
-                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteDrivers(${d.id})">Delete</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editDrivers(${d.id})">修改</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteDrivers(${d.id})">刪除</button>
                     </td>
                 </tr>
             `).join('');
@@ -1309,7 +1309,7 @@
                     <td>$${j.amount}</td>
                     <td><span class="status ${j.status}">${j.status}</span></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="editJob(${j.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editJob(${j.id})">修改</button>
                     </td>
                 </tr>
             `).join('');
@@ -1329,7 +1329,7 @@
                     <td>$${e.amount}</td>
                     <td>${e.notes || '-'}</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="editExpense(${e.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editExpense(${e.id})">修改</button>
                     </td>
                 </tr>
             `).join('');
@@ -1431,7 +1431,7 @@
             `).join('');
         }
         
-        // Edit functions
+        // 修改 functions
         let editingDriversId = null;
         
         function editDrivers(id) {
