@@ -869,6 +869,7 @@
                     <td><span class="status ${d.status === 'active' ? 'completed' : 'pending'}">${d.status}</span></td>
                     <td>
                         <button class="btn btn-secondary btn-sm" onclick="editDriver(${d.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteDriver(${d.id})">Delete</button>
                     </td>
                 </tr>
             `).join('');
@@ -1022,6 +1023,15 @@
                     document.getElementById('driverFullRate').value = driver.fullRate;
                 }
                 openModal('addDriverModal');
+            }
+        }
+        
+        function deleteDriver(id) {
+            if (confirm('Delete this driver?')) {
+                drivers = drivers.filter(d => d.id !== id);
+                localStorage.setItem('nce_drivers', JSON.stringify(drivers));
+                loadDrivers();
+                updateStats();
             }
         }
         
