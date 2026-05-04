@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NCE Dispatch | 新創世紀</title>
+    <title>NCE Dispatch | New Creation Era</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -31,7 +31,7 @@
             min-height: 100vh;
         }
         
-        /* 登入 Screen */
+        /* Login Screen */
         .login-screen {
             min-height: 100vh;
             display: flex;
@@ -358,7 +358,7 @@
             color: #666;
         }
         
-        /* 狀態 badges */
+        /* Status badges */
         .status {
             padding: 4px 12px;
             border-radius: 20px;
@@ -404,22 +404,22 @@
     </style>
 </head>
 <body>
-    <!-- 登入 Screen -->
+    <!-- Login Screen -->
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
-            <h1>🚗 新創世紀</h1>
-            <p class="subtitle">司機調度及薪酬系統</p>
+            <h1>🚗 New Creation Era</h1>
+            <p class="subtitle">Driver Dispatch & Salary System</p>
             <div style="text-align: left; margin-bottom: 16px;">
-                <a href="index.html" style="color: #666; font-size: 14px; text-decoration: none;">English Version</a>
+                <a href="index-zh.html" style="color: #666; font-size: 14px; text-decoration: none;">中文版本</a>
             </div>
             <form id="loginForm">
-                <input type="text" id="username" placeholder="用戶名" required>
-                <input type="password" id="password" placeholder="密碼" required>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
                 <div style="text-align: left; margin-bottom: 16px;">
                     <input type="checkbox" id="rememberMe" style="width: auto; margin-right: 8px;">
-                    <label style="font-weight: normal; font-size: 14px; color: #666;" for="rememberMe">記住30天</label>
+                    <label style="font-weight: normal; font-size: 14px; color: #666;" for="rememberMe">Remember for 30 days</label>
                 </div>
-                <button type="submit">登入</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     </div>
@@ -430,57 +430,57 @@
         <header class="header">
             <div class="header-logo">🚗 NCE Dispatch</div>
             <div class="header-user">
-                <span id="user姓名">歡迎</span>
-                <button class="logout-btn" onclick="logout()">登出</button>
+                <span id="userName">Welcome</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
         </header>
 
         <!-- Stats -->
         <div class="stats-bar">
             <div class="stat-card">
-                <div class="value" id="total司機">0</div>
-                <div class="label">Active 司機</div>
+                <div class="value" id="totalDrivers">0</div>
+                <div class="label">Active Drivers</div>
             </div>
             <div class="stat-card">
-                <div class="value" id="today工作">0</div>
-                <div class="label">Today's 工作</div>
+                <div class="value" id="todayJobs">0</div>
+                <div class="label">Today's Jobs</div>
             </div>
             <div class="stat-card">
                 <div class="value" id="monthlyRevenue">$0</div>
-                <div class="label">月收入</div>
+                <div class="label">Monthly Revenue</div>
             </div>
             <div class="stat-card">
-                <div class="value" id="pending薪酬">$0</div>
-                <div class="label">Pending 薪酬</div>
+                <div class="value" id="pendingSalary">$0</div>
+                <div class="label">Pending Salary</div>
             </div>
         </div>
 
         <!-- Tabs -->
         <div class="tabs">
-            <div class="tab active" data-tab="jobs" data-i18n="工作">工作</div>
-            <div class="tab" data-tab="drivers" data-i18n="司機">司機</div>
-            <div class="tab" data-tab="customers" data-i18n="客戶">客戶</div>
-            <div class="tab" data-tab="salary" data-i18n="薪酬">薪酬</div>
-            <div class="tab" data-tab="expenses" data-i18n="雜費">雜費</div>
+            <div class="tab active" data-tab="jobs" data-i18n="Jobs">Jobs</div>
+            <div class="tab" data-tab="drivers" data-i18n="Drivers">Drivers</div>
+            <div class="tab" data-tab="customers" data-i18n="Customers">Customers</div>
+            <div class="tab" data-tab="salary" data-i18n="Salary">Salary</div>
+            <div class="tab" data-tab="expenses" data-i18n="Expenses">Expenses</div>
         </div>
 
-        <!-- 工作 Section -->
+        <!-- Jobs Section -->
         <div class="content">
             <div class="section active" id="jobsSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Today's 工作</div>
-                        <button class="btn btn-primary btn-sm" onclick="openModal('addJobModal')">+ 新增工作</button>
+                        <div class="card-title">Today's Jobs</div>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('addJobModal')">+ Add Job</button>
                     </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>時間</th>
-                                <th>路線</th>
-                                <th>司機</th>
-                                <th>金額</th>
-                                <th>狀態</th>
-                                <th>操作</th>
+                                <th>Time</th>
+                                <th>Route</th>
+                                <th>Driver</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="jobsTable">
@@ -492,21 +492,21 @@
                 </div>
             </div>
 
-            <!-- 司機 Section -->
+            <!-- Drivers Section -->
             <div class="section" id="driversSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">司機 List</div>
-                        <button class="btn btn-primary btn-sm" onclick="openModal('add司機Modal')">+ 新增司機</button>
+                        <div class="card-title">Driver List</div>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('addDriverModal')">+ Add Driver</button>
                     </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>姓名</th>
-                                <th>電話</th>
+                                <th>Name</th>
+                                <th>Phone</th>
                                 <th>License</th>
-                                <th>狀態</th>
-                                <th>操作</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="driversTable">
@@ -518,11 +518,11 @@
                 </div>
             </div>
 
-            <!-- 薪酬 Section -->
+            <!-- Salary Section -->
             <div class="section" id="salarySection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">薪酬 Calculation</div>
+                        <div class="card-title">Salary Calculation</div>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
                         <div class="form-group">
@@ -534,23 +534,23 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Select 司機</label>
-                            <select id="salary司機">
-                                <option value="">All 司機</option>
+                            <label>Select Driver</label>
+                            <select id="salaryDriver">
+                                <option value="">All Drivers</option>
                             </select>
                         </div>
                         <div style="display: flex; align-items: flex-end;">
-                            <button class="btn btn-primary" onclick="calculate薪酬()" style="width: 100%;">Calculate</button>
+                            <button class="btn btn-primary" onclick="calculateSalary()" style="width: 100%;">Calculate</button>
                         </div>
                     </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>司機</th>
+                                <th>Driver</th>
                                 <th>Type</th>
-                                <th>工作</th>
-                                <th>Base 薪酬</th>
-                                <th>雜費</th>
+                                <th>Jobs</th>
+                                <th>Base Salary</th>
+                                <th>Expenses</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -563,12 +563,12 @@
                 </div>
             </div>
 
-            <!-- 雜費 Section -->
+            <!-- Expenses Section -->
             <div class="section" id="expensesSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Job 雜費</div>
-                        <button class="btn btn-primary btn-sm" onclick="openModal('addExpenseModal')">+ 新增支出</button>
+                        <div class="card-title">Job Expenses</div>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('addExpenseModal')">+ Add Expense</button>
                     </div>
                     <table class="data-table">
                         <thead>
@@ -576,9 +576,9 @@
                                 <th>Date</th>
                                 <th>Job</th>
                                 <th>Type</th>
-                                <th>金額</th>
+                                <th>Amount</th>
                                 <th>Notes</th>
-                                <th>操作</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="expensesTable">
@@ -591,20 +591,20 @@
             </div>
         </div>
 
-            <!-- 客戶 Section -->
+            <!-- Customers Section -->
             <div class="section" id="customersSection">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">客戶 List</div>
-                        <button class="btn btn-primary btn-sm" onclick="openModal('add客戶Modal')">+ 新增客戶</button>
+                        <div class="card-title">Customer List</div>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('addCustomerModal')">+ Add Customer</button>
                     </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>姓名</th>
-                                <th>公司</th>
-                                <th>電話</th>
-                                <th>操作</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="customersTable">
@@ -618,7 +618,7 @@
         </div>
     </div>
 
-    <!-- 新增工作 Modal -->
+    <!-- Add Job Modal -->
     <div class="modal" id="addJobModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -631,32 +631,32 @@
                     <input type="date" id="jobDate" required>
                 </div>
                 <div class="form-group">
-                    <label>時間</label>
-                    <input type="time" id="job時間" required>
+                    <label>Time</label>
+                    <input type="time" id="jobTime" required>
                 </div>
                 <div class="form-group">
-                    <label>路線 (From - To)</label>
-                    <input type="text" id="job路線" placeholder="e.g., HK Airport - Shenzhen" required>
+                    <label>Route (From - To)</label>
+                    <input type="text" id="jobRoute" placeholder="e.g., HK Airport - Shenzhen" required>
                 </div>
                 <div class="form-group">
-                    <label>Assign 司機</label>
-                    <select id="job司機" required>
-                        <option value="">Select 司機</option>
+                    <label>Assign Driver</label>
+                    <select id="jobDriver" required>
+                        <option value="">Select Driver</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>客戶</label>
-                    <select id="job客戶">
-                        <option value="">Select 客戶</option>
+                    <label>Customer</label>
+                    <select id="jobCustomer">
+                        <option value="">Select Customer</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>金額 (HKD)</label>
-                    <input type="number" id="job金額" placeholder="0" required>
+                    <label>Amount (HKD)</label>
+                    <input type="number" id="jobAmount" placeholder="0" required>
                 </div>
                 <div class="form-group">
-                    <label>狀態</label>
-                    <select id="job狀態">
+                    <label>Status</label>
+                    <select id="jobStatus">
                         <option value="pending">Pending</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
@@ -667,21 +667,21 @@
         </div>
     </div>
 
-    <!-- 新增司機 Modal -->
-    <div class="modal" id="add司機Modal">
+    <!-- Add Driver Modal -->
+    <div class="modal" id="addDriverModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Add New 司機</h2>
-                <button class="modal-close" onclick="closeModal('add司機Modal')">&times;</button>
+                <h2>Add New Driver</h2>
+                <button class="modal-close" onclick="closeModal('addDriverModal')">&times;</button>
             </div>
-            <form onsubmit="save司機(event)">
+            <form onsubmit="saveDriver(event)">
                 <div class="form-group">
-                    <label>姓名</label>
-                    <input type="text" id="driver姓名" required>
+                    <label>Name</label>
+                    <input type="text" id="driverName" required>
                 </div>
                 <div class="form-group">
-                    <label>電話</label>
-                    <input type="tel" id="driver電話" required>
+                    <label>Phone</label>
+                    <input type="tel" id="driverPhone" required>
                 </div>
                 <div class="form-group">
                     <label>Car Plate</label>
@@ -690,13 +690,13 @@
                 
                 
                 <div class="form-group">
-                    <label>司機 Type</label>
-                    <select id="driverType" onchange="toggleFull時間Rate()">
+                    <label>Driver Type</label>
+                    <select id="driverType" onchange="toggleFullTimeRate()">
                         <option value="full-time">Full-time (50-60% fare)</option>
                         <option value="part-time">Part-time (custom rate)</option>
                     </select>
                 </div>
-                <div class="form-group" id="full時間RateGroup" style="display:none;">
+                <div class="form-group" id="fullTimeRateGroup" style="display:none;">
                     <label>Full-time Rate</label>
                     <select id="driverFullRate">
                         <option value="0.50">50%</option>
@@ -704,22 +704,22 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>狀態</label>
-                    <select id="driver狀態">
+                    <label>Status</label>
+                    <select id="driverStatus">
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save 司機</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Driver</button>
             </form>
         </div>
     </div>
 
-    <!-- 新增支出 Modal -->
+    <!-- Add Expense Modal -->
     <div class="modal" id="addExpenseModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>新增支出</h2>
+                <h2>Add Expense</h2>
                 <button class="modal-close" onclick="closeModal('addExpenseModal')">&times;</button>
             </div>
             <form onsubmit="saveExpense(event)">
@@ -744,8 +744,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>金額 (HKD)</label>
-                    <input type="number" id="expense金額" placeholder="0" required>
+                    <label>Amount (HKD)</label>
+                    <input type="number" id="expenseAmount" placeholder="0" required>
                 </div>
                 <div class="form-group">
                     <label>Notes</label>
@@ -756,27 +756,27 @@
         </div>
     </div>
 
-    <!-- 新增客戶 Modal -->
-    <div class="modal" id="add客戶Modal">
+    <!-- Add Customer Modal -->
+    <div class="modal" id="addCustomerModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>新增客戶</h2>
-                <button class="modal-close" onclick="closeModal('add客戶Modal')">&times;</button>
+                <h2>Add Customer</h2>
+                <button class="modal-close" onclick="closeModal('addCustomerModal')">&times;</button>
             </div>
-            <form onsubmit="save客戶(event)">
+            <form onsubmit="saveCustomer(event)">
                 <div class="form-group">
-                    <label>客戶 姓名</label>
-                    <input type="text" id="customer姓名" required>
+                    <label>Customer Name</label>
+                    <input type="text" id="customerName" required>
                 </div>
                 <div class="form-group">
-                    <label>公司 姓名</label>
-                    <input type="text" id="customer公司">
+                    <label>Company Name</label>
+                    <input type="text" id="customerCompany">
                 </div>
                 <div class="form-group">
-                    <label>電話</label>
-                    <input type="tel" id="customer電話">
+                    <label>Phone</label>
+                    <input type="tel" id="customerPhone">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Save 客戶</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Customer</button>
             </form>
         </div>
     </div>
@@ -788,7 +788,7 @@
         let expenses = JSON.parse(localStorage.getItem('nce_expenses')) || [];
         let customers = JSON.parse(localStorage.getItem('nce_customers')) || [];
         
-        // 登入
+        // Login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const user = document.getElementById('username').value;
@@ -804,7 +804,7 @@
                     localStorage.setItem('nce_login', JSON.stringify({
                         user: user,
                         pass: pass,
-                        expiry: expiry.get時間()
+                        expiry: expiry.getTime()
                     }));
                 } else {
                     localStorage.removeItem('nce_login');
@@ -812,7 +812,7 @@
                 
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
-                document.getElementById('user姓名').textContent = '歡迎, ' + (user === 'bel' ? 'Bel' : 'Kelson');
+                document.getElementById('userName').textContent = 'Welcome, ' + (user === 'bel' ? 'Bel' : 'Kelson');
                 loadData();
             } else {
                 alert('Invalid credentials. Try: bel/nce2026 or kelson/nce2026');
@@ -821,10 +821,10 @@
         
         // Check for remembered login
         window.addEventListener('DOMContentLoaded', function() {
-            const saved登入 = localStorage.getItem('nce_login');
-            if (saved登入) {
+            const savedLogin = localStorage.getItem('nce_login');
+            if (savedLogin) {
                 try {
-                    const login = JSON.parse(saved登入);
+                    const login = JSON.parse(savedLogin);
                     if (login.expiry > Date.now()) {
                         // Auto login
                         document.getElementById('username').value = login.user;
@@ -849,69 +849,69 @@
         const translations = {
             en: {
                 'Dashboard': 'Dashboard',
-                '工作': '訂單',
-                '司機': '司機',
-                '客戶': '客戶',
-                '薪酬': '薪酬',
-                '雜費': '雜費',
-                "Today's 工作": "Today's 工作",
-                '月收入': '月收入',
-                'Pending 薪酬': 'Pending 薪酬',
-                '新增工作': '+ 新增工作',
-                '新增司機': '+ 新增司機',
-                '新增客戶': '+ 新增客戶',
-                '新增支出': '+ 新增支出',
-                '時間': '時間',
-                '路線': '路線',
-                '司機': '司機',
-                '客戶': '客戶',
-                '金額': '金額',
-                '狀態': '狀態',
-                '操作': '操作',
-                '姓名': '姓名',
-                '公司': '公司',
-                '電話': '電話',
+                'Jobs': '訂單',
+                'Drivers': 'Drivers',
+                'Customers': 'Customers',
+                'Salary': 'Salary',
+                'Expenses': 'Expenses',
+                "Today's Jobs": "Today's Jobs",
+                'Monthly Revenue': 'Monthly Revenue',
+                'Pending Salary': 'Pending Salary',
+                'Add Job': '+ Add Job',
+                'Add Driver': '+ Add Driver',
+                'Add Customer': '+ Add Customer',
+                'Add Expense': '+ Add Expense',
+                'Time': 'Time',
+                'Route': 'Route',
+                'Driver': 'Driver',
+                'Customer': 'Customer',
+                'Amount': 'Amount',
+                'Status': 'Status',
+                'Actions': 'Actions',
+                'Name': 'Name',
+                'Company': 'Company',
+                'Phone': 'Phone',
                 'Type': 'Type',
                 'Save': 'Save',
                 'Cancel': 'Cancel',
-                '登出': '登出',
-                '歡迎': '歡迎',
-                'Active 司機': 'Active 司機',
-                'Select 司機': 'Select 司機',
-                'Select 客戶': 'Select 客戶'
+                'Logout': 'Logout',
+                'Welcome': 'Welcome',
+                'Active Drivers': 'Active Drivers',
+                'Select Driver': 'Select Driver',
+                'Select Customer': 'Select Customer'
             },
             zh: {
                 'Dashboard': '控制面板',
-                '工作': '訂單',
-                '司機': '司機',
-                '客戶': '客戶',
-                '薪酬': '薪酬',
-                '雜費': '雜費',
-                "Today's 工作": '今日工作',
-                '月收入': '月收入',
-                'Pending 薪酬': '待付薪酬',
-                '新增工作': '+ 新增工作',
-                '新增司機': '+ 新增司機',
-                '新增客戶': '+ 新增客戶',
-                '新增支出': '+ 新增支出',
-                '時間': '時間',
-                '路線': '路線',
-                '司機': '司機',
-                '客戶': '客戶',
-                '金額': '金額',
-                '狀態': '狀態',
-                '操作': '操作',
-                '姓名': '姓名',
-                '公司': '公司',
-                '電話': '電話',
+                'Jobs': '訂單',
+                'Drivers': '司機',
+                'Customers': '客戶',
+                'Salary': '薪酬',
+                'Expenses': '雜費',
+                "Today's Jobs": '今日工作',
+                'Monthly Revenue': '月收入',
+                'Pending Salary': '待付薪酬',
+                'Add Job': '+ 新增工作',
+                'Add Driver': '+ 新增司機',
+                'Add Customer': '+ 新增客戶',
+                'Add Expense': '+ 新增支出',
+                'Time': '時間',
+                'Route': '路線',
+                'Driver': '司機',
+                'Customer': '客戶',
+                'Amount': '金額',
+                'Status': '狀態',
+                'Actions': '操作',
+                'Name': '姓名',
+                'Company': '公司',
+                'Phone': '電話',
                 'Type': '類型',
                 'Save': '儲存',
                 'Cancel': '取消',
-                '登出': '登出',
-                '歡迎': '歡迎',
-                'Active 司機': '在職司機',
-                'Select 司機': '���擇司機',
-                'Select 客戶': '選擇客戶'
+                'Logout': '登出',
+                'Welcome': '歡迎',
+                'Active Drivers': '在職司機',
+                'Select Driver': '���擇司機',
+                'Select Customer': '選擇客戶'
             }
         };
         
@@ -932,43 +932,43 @@
             
             const translations = {
                 en: {
-                    '司機調度及薪酬系統': '司機調度及薪酬系統',
-                    '用戶名': '用戶名',
-                    '密碼': '密碼',
-                    '登入': '登入',
-                    '記住30天': '記住30天',
+                    'Driver Dispatch & Salary System': '司機調度及薪酬系統',
+                    'Username': '用戶名',
+                    'Password': '密碼',
+                    'Login': '登入',
+                    'Remember for 30 days': '記住30天',
                     'Dashboard': '控制面板',
-                    "Today's 工作": '今日工作',
+                    "Today's Jobs": '今日工作',
                     "Today's": '今日',
-                    '月收入': '月收入',
-                    'Pending 薪酬': '待付薪酬',
-                    'Active 司機': '在職司機',
-                    '工作': '訂單',
-                    '司機': '司機',
-                    '客戶': '客戶',
-                    '薪酬': '薪酬',
-                    '雜費': '雜費',
-                    "Today's 工作": '今日工作',
-                    '新增工作': '新增工作',
-                    '新增司機': '新增司機',
-                    '新增客戶': '新增客戶',
-                    '新增支出': '新增支出',
+                    'Monthly Revenue': '月收入',
+                    'Pending Salary': '待付薪酬',
+                    'Active Drivers': '在職司機',
+                    'Jobs': '訂單',
+                    'Drivers': '司機',
+                    'Customers': '客戶',
+                    'Salary': '薪酬',
+                    'Expenses': '雜費',
+                    "Today's Jobs": '今日工作',
+                    'Add Job': '新增工作',
+                    'Add Driver': '新增司機',
+                    'Add Customer': '新增客戶',
+                    'Add Expense': '新增支出',
                     "No jobs today. Add a new job to get started.": '今日沒有工作。',
                     'No drivers added yet.': '尚未添加司機。',
                     'No customers added yet.': '尚未添加客戶。',
                     'No expenses recorded.': '沒有記錄支出。',
-                    '時間': '時間',
-                    '路線': '路線',
-                    '司機': '司機',
-                    '客戶': '客戶',
-                    '金額': '金額',
-                    '狀態': '狀態',
-                    '操作': '操作',
-                    '姓名': '姓名',
-                    '公司': '公司',
-                    '電話': '電話',
-                    'Select 司機': '選擇司機',
-                    'Select 客戶': '選擇客戶',
+                    'Time': '時間',
+                    'Route': '路線',
+                    'Driver': '司機',
+                    'Customer': '客戶',
+                    'Amount': '金額',
+                    'Status': '狀態',
+                    'Actions': '操作',
+                    'Name': '姓名',
+                    'Company': '公司',
+                    'Phone': '電話',
+                    'Select Driver': '選擇司機',
+                    'Select Customer': '選擇客戶',
                     'Full-time (50-60% fare)': '全職 (50-60% 車資)',
                     'Part-time (custom rate)': '兼職 (自訂金額)',
                     'Active': '在職',
@@ -983,8 +983,8 @@
                     'Fashion Model': '時尚模特兒',
                     'Promotional Staff': '推廣員工',
                     'Save Job': '儲存工作',
-                    'Save 司機': '儲存司機',
-                    'Save 客戶': '儲存客戶',
+                    'Save Driver': '儲存司機',
+                    'Save Customer': '儲存客戶',
                     'Save Expense': '儲存支出',
                     'Date': '日期',
                     'Expense Type': '支出類型',
@@ -996,47 +996,47 @@
                     'Other': '其他',
                     'Edit': '編輯',
                     'Delete': '刪除',
-                    '歡迎': '歡迎',
-                    '登出': '登出',
-                    '新創世紀': '新創世紀'
+                    'Welcome': '歡迎',
+                    'Logout': '登出',
+                    'New Creation Era': '新創世紀'
                 },
                 zh: {
-                    '司機調度及薪酬系統': '司機調度及薪酬系統',
-                    '用戶名': '用戶名',
-                    '密碼': '密碼',
-                    '登入': '登入',
-                    '記住30天': '記住30天',
+                    'Driver Dispatch & Salary System': '司機調度及薪酬系統',
+                    'Username': '用戶名',
+                    'Password': '密碼',
+                    'Login': '登入',
+                    'Remember for 30 days': '記住30天',
                     'Dashboard': '控制面板',
-                    "Today's 工作": '今日工作',
+                    "Today's Jobs": '今日工作',
                     "Today's": '今日',
-                    '月收入': '月收入',
-                    'Pending 薪酬': '待付薪酬',
-                    'Active 司機': '在職司機',
-                    '工作': '訂單',
-                    '司機': '司機',
-                    '客戶': '客戶',
-                    '薪酬': '薪酬',
-                    '雜費': '雜費',
-                    '新增工作': '新增工作',
-                    '新增司機': '新增司機',
-                    '新增客戶': '新增客戶',
-                    '新增支出': '新增支出',
+                    'Monthly Revenue': '月收入',
+                    'Pending Salary': '待付薪酬',
+                    'Active Drivers': '在職司機',
+                    'Jobs': '訂單',
+                    'Drivers': '司機',
+                    'Customers': '客戶',
+                    'Salary': '薪酬',
+                    'Expenses': '雜費',
+                    'Add Job': '新增工作',
+                    'Add Driver': '新增司機',
+                    'Add Customer': '新增客戶',
+                    'Add Expense': '新增支出',
                     "No jobs today. Add a new job to get started.": '今日沒有工作。點擊上方新增工作。',
                     'No drivers added yet.': '尚未添加司機。',
                     'No customers added yet.': '尚未添加客戶。',
                     'No expenses recorded.': '沒有記錄支出。',
-                    '時間': '時間',
-                    '路線': '路線',
-                    '司機': '司機',
-                    '客戶': '客戶',
-                    '金額': '金額',
-                    '狀態': '狀態',
-                    '操作': '操作',
-                    '姓名': '姓名',
-                    '公司': '公司',
-                    '電話': '電話',
-                    'Select 司機': '選擇司機',
-                    'Select 客戶': '選擇客戶',
+                    'Time': '時間',
+                    'Route': '路線',
+                    'Driver': '司機',
+                    'Customer': '客戶',
+                    'Amount': '金額',
+                    'Status': '狀態',
+                    'Actions': '操作',
+                    'Name': '姓名',
+                    'Company': '公司',
+                    'Phone': '電話',
+                    'Select Driver': '選擇司機',
+                    'Select Customer': '選擇客戶',
                     'Full-time (50-60% fare)': '全職 (50-60% 車資)',
                     'Part-time (custom rate)': '兼職 (自訂金額)',
                     'Active': '在職',
@@ -1051,8 +1051,8 @@
                     'Fashion Model': '時尚模特兒',
                     'Promotional Staff': '推廣員工',
                     'Save Job': '儲存工作',
-                    'Save 司機': '儲存司機',
-                    'Save 客戶': '儲存客戶',
+                    'Save Driver': '儲存司機',
+                    'Save Customer': '儲存客戶',
                     'Save Expense': '儲存支出',
                     'Date': '日期',
                     'Expense Type': '支出類型',
@@ -1064,9 +1064,9 @@
                     'Other': '其他',
                     'Edit': '編輯',
                     'Delete': '刪除',
-                    '歡迎': '歡迎',
-                    '登出': '登出',
-                    '新創世紀': '新創世紀'
+                    'Welcome': '歡迎',
+                    'Logout': '登出',
+                    'New Creation Era': '新創世紀'
                 }
             };
             
@@ -1075,7 +1075,7 @@
                 const text = el.textContent.trim();
                 if (translations[lang][text]) {
                     el.textContent = translations[lang][text];
-                } else if (el.tag姓名 === 'TH' || el.tag姓名 === 'TD') {
+                } else if (el.tagName === 'TH' || el.tagName === 'TD') {
                     // Handle table headers
                     Object.keys(translations[lang]).forEach(key => {
                         if (text.includes(key)) {
@@ -1086,8 +1086,8 @@
             });
             
             // Translate placeholders
-            document.getElementById('username').placeholder = translations[lang]['用戶名'];
-            document.getElementById('password').placeholder = translations[lang]['密碼'];
+            document.getElementById('username').placeholder = translations[lang]['Username'];
+            document.getElementById('password').placeholder = translations[lang]['Password'];
         }
         
         function logout() {
@@ -1120,63 +1120,63 @@
             const job = {
                 id: Date.now(),
                 date: document.getElementById('jobDate').value,
-                time: document.getElementById('job時間').value,
-                route: document.getElementById('job路線').value,
-                driver: document.getElementById('job司機').value,
-                customer: document.getElementById('job客戶').value,
-                amount: parseFloat(document.getElementById('job金額').value),
-                status: document.getElementById('job狀態').value
+                time: document.getElementById('jobTime').value,
+                route: document.getElementById('jobRoute').value,
+                driver: document.getElementById('jobDriver').value,
+                customer: document.getElementById('jobCustomer').value,
+                amount: parseFloat(document.getElementById('jobAmount').value),
+                status: document.getElementById('jobStatus').value
             };
             jobs.push(job);
             localStorage.setItem('nce_jobs', JSON.stringify(jobs));
             closeModal('addJobModal');
-            load工作();
+            loadJobs();
             updateStats();
             e.target.reset();
         }
         
-        // Save 司機
-        function save司機(e) {
+        // Save Driver
+        function saveDriver(e) {
             e.preventDefault();
-            const driver姓名 = document.getElementById('driver姓名').value;
+            const driverName = document.getElementById('driverName').value;
             
             // Check for duplicate (exclude current editing driver)
-            if (!editing司機Id) {
-                const duplicate = drivers.find(d => d.name.toLowerCase() === driver姓名.toLowerCase());
+            if (!editingDriverId) {
+                const duplicate = drivers.find(d => d.name.toLowerCase() === driverName.toLowerCase());
                 if (duplicate) {
-                    alert('司機 already exists!');
+                    alert('Driver already exists!');
                     return;
                 }
             }
             
             const driverData = {
-                id: editing司機Id || Date.now(),
-                name: driver姓名,
-                phone: document.getElementById('driver電話').value,
+                id: editingDriverId || Date.now(),
+                name: driverName,
+                phone: document.getElementById('driverPhone').value,
                 license: document.getElementById('driverLicense').value,
                 driverType: document.getElementById('driverType').value,
                 fullRate: document.getElementById('driverType').value === 'full-time' ? document.getElementById('driverFullRate').value : null,
-                status: document.getElementById('driver狀態').value
+                status: document.getElementById('driverStatus').value
             };
             
-            if (editing司機Id) {
-                const index = drivers.findIndex(d => d.id === editing司機Id);
+            if (editingDriverId) {
+                const index = drivers.findIndex(d => d.id === editingDriverId);
                 if (index > -1) drivers[index] = driverData;
             } else {
                 drivers.push(driverData);
             }
             
             localStorage.setItem('nce_drivers', JSON.stringify(drivers));
-            closeModal('add司機Modal');
-            load司機();
+            closeModal('addDriverModal');
+            loadDrivers();
             updateStats();
             e.target.reset();
-            editing司機Id = null;
+            editingDriverId = null;
         }
         
-        function toggleFull時間Rate() {
+        function toggleFullTimeRate() {
             const type = document.getElementById('driverType').value;
-            document.getElementById('full時間RateGroup').style.display = type === 'full-time' ? 'block' : 'none';
+            document.getElementById('fullTimeRateGroup').style.display = type === 'full-time' ? 'block' : 'none';
         }
         
         // Save Expense
@@ -1187,44 +1187,44 @@
                 date: document.getElementById('expenseDate').value,
                 job: document.getElementById('expenseJob').value,
                 type: document.getElementById('expenseType').value,
-                amount: parseFloat(document.getElementById('expense金額').value),
+                amount: parseFloat(document.getElementById('expenseAmount').value),
                 notes: document.getElementById('expenseNotes').value
             };
             expenses.push(expense);
             localStorage.setItem('nce_expenses', JSON.stringify(expenses));
             closeModal('addExpenseModal');
-            load雜費();
+            loadExpenses();
             e.target.reset();
         }
         
-        // Save 客戶
-        let editing客戶Id = null;
+        // Save Customer
+        let editingCustomerId = null;
         
-        function save客戶(e) {
+        function saveCustomer(e) {
             e.preventDefault();
             const customerData = {
-                id: editing客戶Id || Date.now(),
-                name: document.getElementById('customer姓名').value,
-                company: document.getElementById('customer公司').value,
-                phone: document.getElementById('customer電話').value
+                id: editingCustomerId || Date.now(),
+                name: document.getElementById('customerName').value,
+                company: document.getElementById('customerCompany').value,
+                phone: document.getElementById('customerPhone').value
             };
             
-            if (editing客戶Id) {
-                const index = customers.findIndex(c => c.id === editing客戶Id);
+            if (editingCustomerId) {
+                const index = customers.findIndex(c => c.id === editingCustomerId);
                 if (index > -1) customers[index] = customerData;
             } else {
                 customers.push(customerData);
             }
             
             localStorage.setItem('nce_customers', JSON.stringify(customers));
-            closeModal('add客戶Modal');
-            load客戶();
-            update客戶Selects();
+            closeModal('addCustomerModal');
+            loadCustomers();
+            updateCustomerSelects();
             e.target.reset();
-            editing客戶Id = null;
+            editingCustomerId = null;
         }
         
-        function load客戶() {
+        function loadCustomers() {
             const tbody = document.getElementById('customersTable');
             if (customers.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No customers added yet.</td></tr>';
@@ -1236,45 +1236,45 @@
                     <td>${c.company || '-'}</td>
                     <td>${c.phone || '-'}</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="edit客戶(${c.id})">Edit</button>
-                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="delete客戶(${c.id})">Delete</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editCustomer(${c.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteCustomer(${c.id})">Delete</button>
                     </td>
                 </tr>
             `).join('');
         }
         
-        function edit客戶(id) {
+        function editCustomer(id) {
             const customer = customers.find(c => c.id === id);
             if (customer) {
-                editing客戶Id = id;
-                document.getElementById('customer姓名').value = customer.name;
-                document.getElementById('customer公司').value = customer.company || '';
-                document.getElementById('customer電話').value = customer.phone || '';
-                openModal('add客戶Modal');
+                editingCustomerId = id;
+                document.getElementById('customerName').value = customer.name;
+                document.getElementById('customerCompany').value = customer.company || '';
+                document.getElementById('customerPhone').value = customer.phone || '';
+                openModal('addCustomerModal');
             }
         }
         
-        function delete客戶(id) {
+        function deleteCustomer(id) {
             if (confirm('Delete this customer?')) {
                 customers = customers.filter(c => c.id !== id);
                 localStorage.setItem('nce_customers', JSON.stringify(customers));
-                load客戶();
-                update客戶Selects();
+                loadCustomers();
+                updateCustomerSelects();
             }
         }
         
         // Load Data
         function loadData() {
-            load司機();
-            load客戶();
-            load工作();
-            load雜費();
+            loadDrivers();
+            loadCustomers();
+            loadJobs();
+            loadExpenses();
             updateStats();
-            update司機Selects();
-            update客戶Selects();
+            updateDriverSelects();
+            updateCustomerSelects();
         }
         
-        function load司機() {
+        function loadDrivers() {
             const tbody = document.getElementById('driversTable');
             if (drivers.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No drivers added yet.</td></tr>';
@@ -1288,14 +1288,14 @@
                     <td>$${d.rate}</td>
                     <td><span class="status ${d.status === 'active' ? 'completed' : 'pending'}">${d.status}</span></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="edit司機(${d.id})">Edit</button>
-                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="delete司機(${d.id})">Delete</button>
+                        <button class="btn btn-secondary btn-sm" onclick="editDriver(${d.id})">Edit</button>
+                        <button class="btn btn-secondary btn-sm" style="background:#fee2e2;color:#991b1b;margin-left:4px;" onclick="deleteDriver(${d.id})">Delete</button>
                     </td>
                 </tr>
             `).join('');
         }
         
-        function load工作() {
+        function loadJobs() {
             const tbody = document.getElementById('jobsTable');
             if (jobs.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No jobs today.</td></tr>';
@@ -1315,7 +1315,7 @@
             `).join('');
         }
         
-        function load雜費() {
+        function loadExpenses() {
             const tbody = document.getElementById('expensesTable');
             if (expenses.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No expenses recorded.</td></tr>';
@@ -1336,62 +1336,62 @@
         }
         
         function updateStats() {
-            document.getElementById('total司機').textContent = drivers.filter(d => d.status === 'active').length;
+            document.getElementById('totalDrivers').textContent = drivers.filter(d => d.status === 'active').length;
             
             const today = new Date().toISOString().split('T')[0];
-            const today工作 = jobs.filter(j => j.date === today);
-            document.getElementById('today工作').textContent = today工作.length;
+            const todayJobs = jobs.filter(j => j.date === today);
+            document.getElementById('todayJobs').textContent = todayJobs.length;
             
             // Monthly revenue
             const month = document.getElementById('salaryMonth')?.value || new Date().toISOString().slice(0, 7);
-            const month工作 = jobs.filter(j => j.date.startsWith(month) && j.status === 'completed');
-            const revenue = month工作.reduce((sum, j) => sum + j.amount, 0);
+            const monthJobs = jobs.filter(j => j.date.startsWith(month) && j.status === 'completed');
+            const revenue = monthJobs.reduce((sum, j) => sum + j.amount, 0);
             document.getElementById('monthlyRevenue').textContent = '$' + revenue.toLocaleString();
             
             // Pending salary
-            const pending = today工作.filter(j => j.status === 'pending');
-            document.getElementById('pending薪酬').textContent = '$' + pending.reduce((sum, j) => sum + j.amount, 0);
+            const pending = todayJobs.filter(j => j.status === 'pending');
+            document.getElementById('pendingSalary').textContent = '$' + pending.reduce((sum, j) => sum + j.amount, 0);
         }
         
-        function update司機Selects() {
-            const options = '<option value="">Select 司機</option>' + drivers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
-            document.getElementById('job司機').innerHTML = options;
-            document.getElementById('salary司機').innerHTML = '<option value="">All 司機</option>' + drivers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+        function updateDriverSelects() {
+            const options = '<option value="">Select Driver</option>' + drivers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+            document.getElementById('jobDriver').innerHTML = options;
+            document.getElementById('salaryDriver').innerHTML = '<option value="">All Drivers</option>' + drivers.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
             
             // Job options for expenses
             const jobOptions = '<option value="">Select Job</option>' + jobs.map(j => `<option value="${j.route}">${j.route} (${j.date})</option>`).join('');
             document.getElementById('expenseJob').innerHTML = jobOptions;
         }
         
-        function update客戶Selects() {
-            const options = '<option value="">Select 客戶</option>' + customers.map(c => `<option value="${c.name}">${c.name}${c.company ? ' - ' + c.company : ''}</option>`).join('');
-            document.getElementById('job客戶').innerHTML = options;
+        function updateCustomerSelects() {
+            const options = '<option value="">Select Customer</option>' + customers.map(c => `<option value="${c.name}">${c.name}${c.company ? ' - ' + c.company : ''}</option>`).join('');
+            document.getElementById('jobCustomer').innerHTML = options;
         }
         
-        function calculate薪酬() {
+        function calculateSalary() {
             const month = document.getElementById('salaryMonth').value;
-            const driverFilter = document.getElementById('salary司機').value;
+            const driverFilter = document.getElementById('salaryDriver').value;
             
             const driverSalaries = {};
             
             jobs.forEach(job => {
                 if (job.date.startsWith(month) && job.status === 'completed') {
-                    const driver姓名 = job.driver;
-                    const driver = drivers.find(d => d.name === driver姓名);
+                    const driverName = job.driver;
+                    const driver = drivers.find(d => d.name === driverName);
                     const driverType = driver?.driverType || 'part-time';
                     const fullRate = driver?.fullRate ? parseFloat(driver.fullRate) : 0.55;
                     
-                    if (!driverSalaries[driver姓名]) {
-                        driverSalaries[driver姓名] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: driverType, rate: fullRate };
+                    if (!driverSalaries[driverName]) {
+                        driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: driverType, rate: fullRate };
                     }
-                    driverSalaries[driver姓名].jobs++;
+                    driverSalaries[driverName].jobs++;
                     
                     // Full-time: custom rate (50%, 55%, or 60%)
                     // Part-time: 40% fallback
                     if (driverType === 'full-time') {
-                        driverSalaries[driver姓名].base += job.amount * fullRate;
+                        driverSalaries[driverName].base += job.amount * fullRate;
                     } else {
-                        driverSalaries[driver姓名].base += job.amount * 0.4;
+                        driverSalaries[driverName].base += job.amount * 0.4;
                     }
                 }
             });
@@ -1400,12 +1400,12 @@
                 if (exp.date.startsWith(month)) {
                     const job = jobs.find(j => j.id === exp.job);
                     if (job) {
-                        const driver姓名 = job?.driver;
-                        if (driver姓名 && (!driverFilter || driver姓名 === driverFilter)) {
-                            if (!driverSalaries[driver姓名]) {
-                                driverSalaries[driver姓名] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: 'part-time' };
+                        const driverName = job?.driver;
+                        if (driverName && (!driverFilter || driverName === driverFilter)) {
+                            if (!driverSalaries[driverName]) {
+                                driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: 'part-time' };
                             }
-                            driverSalaries[driver姓名].expenses += exp.amount;
+                            driverSalaries[driverName].expenses += exp.amount;
                         }
                     }
                 }
@@ -1432,32 +1432,32 @@
         }
         
         // Edit functions
-        let editing司機Id = null;
+        let editingDriverId = null;
         
-        function edit司機(id) {
+        function editDriver(id) {
             const driver = drivers.find(d => d.id === id);
             if (driver) {
-                editing司機Id = id;
-                document.getElementById('driver姓名').value = driver.name;
-                document.getElementById('driver電話').value = driver.phone;
+                editingDriverId = id;
+                document.getElementById('driverName').value = driver.name;
+                document.getElementById('driverPhone').value = driver.phone;
                 document.getElementById('driverLicense').value = driver.license;
                 document.getElementById('driverType').value = driver.driverType || 'part-time';
-                document.getElementById('driver狀態').value = driver.status;
-                toggleFull時間Rate();
+                document.getElementById('driverStatus').value = driver.status;
+                toggleFullTimeRate();
                 if (driver.fullRate) {
                     document.getElementById('driverFullRate').value = driver.fullRate;
                 }
-                openModal('add司機Modal');
+                openModal('addDriverModal');
             }
         }
         
-        function delete司機(id) {
+        function deleteDriver(id) {
             if (confirm('Delete this driver?')) {
                 drivers = drivers.filter(d => d.id !== id);
                 localStorage.setItem('nce_drivers', JSON.stringify(drivers));
-                load司機();
+                loadDrivers();
                 updateStats();
-                update司機Selects();
+                updateDriverSelects();
             }
         }
         
@@ -1465,10 +1465,10 @@
             const job = jobs.find(j => j.id === id);
             if (job) {
                 document.getElementById('jobDate').value = job.date;
-                document.getElementById('job時間').value = job.time;
-                document.getElementById('job路線').value = job.route;
-                document.getElementById('job金額').value = job.amount;
-                document.getElementById('job狀態').value = job.status;
+                document.getElementById('jobTime').value = job.time;
+                document.getElementById('jobRoute').value = job.route;
+                document.getElementById('jobAmount').value = job.amount;
+                document.getElementById('jobStatus').value = job.status;
                 openModal('addJobModal');
             }
         }
@@ -1477,7 +1477,7 @@
             const expense = expenses.find(e => e.id === id);
             if (expense) {
                 document.getElementById('expenseDate').value = expense.date;
-                document.getElementById('expense金額').value = expense.amount;
+                document.getElementById('expenseAmount').value = expense.amount;
                 document.getElementById('expenseNotes').value = expense.notes;
                 openModal('addExpenseModal');
             }
