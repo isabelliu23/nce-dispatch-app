@@ -539,9 +539,9 @@
                         <thead>
                             <tr>
                                 <th>Driver</th>
+                                <th>Type</th>
                                 <th>Jobs</th>
                                 <th>Base Salary</th>
-                                <th>OT</th>
                                 <th>Expenses</th>
                                 <th>Total</th>
                             </tr>
@@ -919,11 +919,22 @@
             jobs.forEach(job => {
                 if (job.date.startsWith(month) && job.status === 'completed') {
                     const driverName = job.driver;
+                    const driver = drivers.find(d => d.name === driverName);
+                    const driverType = driver?.driverType || 'part-time';
+                    
                     if (!driverSalaries[driverName]) {
-                        driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0 };
+                        driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: driverType };
                     }
                     driverSalaries[driverName].jobs++;
-                    driverSalaries[driverName].base += job.amount * 0.4; // 40% to driver
+                    
+                    // Full-time: 55% of fare (middle of 50-60%)
+                    // Part-time: custom amount stored in job
+                    if (driverType === 'full-time') {
+                        driverSalaries[driverName].base += job.amount * 0.55;
+                    } else {
+                        // Part-time: use stored custom amount or 40% fallback
+                        driverSalaries[driverName].base += job.amount * 0.4;
+                    }
                 }
             });
             
@@ -934,7 +945,7 @@
                         const driverName = job?.driver;
                         if (driverName && (!driverFilter || driverName === driverFilter)) {
                             if (!driverSalaries[driverName]) {
-                                driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0 };
+                                driverSalaries[driverName] = { jobs: 0, base: 0, ot: 0, expenses: 0, type: 'part-time' };
                             }
                             driverSalaries[driverName].expenses += exp.amount;
                         }
@@ -953,11 +964,11 @@
             tbody.innerHTML = entries.map(([name, data]) => `
                 <tr>
                     <td>${name}</td>
+                    <td>${data.type === 'full-time' ? 'Full-time (55%)' : 'Part-time'}</td>
                     <td>${data.jobs}</td>
                     <td>$${data.base.toFixed(2)}</td>
-                    <td>$${data.ot.toFixed(2)}</td>
                     <td>$${data.expenses.toFixed(2)}</td>
-                    <td><strong>$${(data.base + data.ot + data.expenses).toFixed(2)}</strong></td>
+                    <td><strong>$${(data.base + data.expenses).toFixed(2)}</strong></td>
                 </tr>
             `).join('');
         }
