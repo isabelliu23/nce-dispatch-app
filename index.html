@@ -799,8 +799,8 @@
             if ((user === 'bel' || user === 'kelson') && pass === 'nce2026') {
                 // Remember me for 30 days
                 if (rememberMe) {
-                    const expiry = new 日期();
-                    expiry.set日期(expiry.get日期() + 30);
+                    const expiry = new Date();
+                    expiry.setDate(expiry.getTime() + 30);
                     localStorage.setItem('nce_login', JSON.stringify({
                         user: user,
                         pass: pass,
@@ -1338,12 +1338,12 @@
         function updateStats() {
             document.getElementById('totalDrivers').textContent = drivers.filter(d => d.status === 'active').length;
             
-            const today = new 日期().toISOString().split('T')[0];
+            const today = new Date().toISOString().split('T')[0];
             const todayJobs = jobs.filter(j => j.date === today);
             document.getElementById('todayJobs').textContent = todayJobs.length;
             
             // Monthly revenue
-            const month = document.getElementById('salaryMonth')?.value || new 日期().toISOString().slice(0, 7);
+            const month = document.getElementById('salaryMonth')?.value || new Date().toISOString().slice(0, 7);
             const monthJobs = jobs.filter(j => j.date.startsWith(month) && j.status === 'completed');
             const revenue = monthJobs.reduce((sum, j) => sum + j.amount, 0);
             document.getElementById('monthlyRevenue').textContent = '$' + revenue.toLocaleString();
@@ -1484,8 +1484,8 @@
         }
         
         // Set default date
-        document.getElementById('job日期').value = new 日期().toISOString().split('T')[0];
-        document.getElementById('expense日期').value = new 日期().toISOString().split('T')[0];
+        document.getElementById('job日期').value = new Date().toISOString().split('T')[0];
+        document.getElementById('expense日期').value = new Date().toISOString().split('T')[0];
     </script>
 </body>
 </html>
