@@ -410,7 +410,7 @@
             <h1>🚗 New Creation Era</h1>
             <p class="subtitle">Driver Dispatch & Salary System</p>
             <div style="text-align: left; margin-bottom: 16px;">
-                <select id="langSelect" onchange="changeLanguage()" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+                <select id="langSelect" onchange="doLang(this.value)" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
                     <option value="en">English</option>
                     <option value="zh">中文 (Traditional Chinese)</option>
                 </select>
@@ -433,7 +433,7 @@
         <header class="header">
             <div class="header-logo">🚗 NCE Dispatch</div>
             <div class="header-user">
-                <select id="headerLang" onchange="changeLanguage()" style="padding: 4px 8px; border: 1px solid var(--gold); border-radius: 4px; background: transparent; color: var(--gold); font-size: 12px;">
+                <select id="headerLang" onchange="doLang(this.value)" style="padding: 4px 8px; border: 1px solid var(--gold); border-radius: 4px; background: transparent; color: var(--gold); font-size: 12px;">
                     <option value="en">EN</option>
                     <option value="zh">中文</option>
                 </select>
@@ -848,7 +848,8 @@
             // Load saved language
             const savedLang = localStorage.getItem('nce_lang') || 'en';
             document.getElementById('langSelect').value = savedLang;
-            changeLanguage();
+            document.getElementById('headerLang').value = savedLang;
+            applyTranslation(savedLang);
         });
         
         // Language translations
@@ -922,10 +923,19 @@
         };
         
         function changeLanguage() {
-            const lang = document.getElementById('langSelect').value;
+            const langSelect = document.getElementById('langSelect');
             const headerLang = document.getElementById('headerLang');
-            if (headerLang) headerLang.value = lang;
+        }
+        
+        function doLang(lang) {
             localStorage.setItem('nce_lang', lang);
+            // Sync both dropdowns
+            document.getElementById('langSelect').value = lang;
+            document.getElementById('headerLang').value = lang;
+            applyTranslation(lang);
+        }
+        
+        function applyTranslation(lang) {
             
             const translations = {
                 en: {
